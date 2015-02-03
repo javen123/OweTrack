@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>9D751F34-7C5A-4C27-9B28-C0F97CC2044E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>OweTrack</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>0E2434545DC66D43ACEE3E98368CB1CFDE5B77CE</key>
+		<string>https://github.com/javen123/OweTrack.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>OweTrack.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>0E2434545DC66D43ACEE3E98368CB1CFDE5B77CE</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/javen123/OweTrack.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>0E2434545DC66D43ACEE3E98368CB1CFDE5B77CE</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>0E2434545DC66D43ACEE3E98368CB1CFDE5B77CE</string>
+			<key>IDESourceControlWCCName</key>
+			<string>OweTrack</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -11,47 +11,72 @@ import Foundation
 
 
 
-class DashBoardVC: UIViewController {
-
+class DashBoardVC: UIViewController, UITabBarControllerDelegate {
+    
     @IBOutlet weak var netAmountLabel: UILabel!
     @IBOutlet weak var amountOwedLabel: UILabel!
     @IBOutlet weak var amountOweLabel: UILabel!
     
     var jsonResponse:NSDictionary!
     
-    override func viewWillAppear(animated: Bool) {
-//        DataController.makeTrackAPIRequest()
-    }
+    @IBOutlet weak var tabBar: UITabBar!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
         
+        
+        
+        amountsLabels()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    override func viewWillAppear(animated: Bool) {
+        DataController.makeTrackAPIRequest()
+    }
     
     override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+       
+        DataController.makeTrackAPIRequest()
         amountsLabels()
+        
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let isLoggedIn:Int = prefs.integerForKey("ISLOGGEDIN") as Int
-        if (isLoggedIn != 1) {
-            self.performSegueWithIdentifier("signInSegue", sender: self)
+        
+        if prefs.valueForKey("ISLOGGEDIN") == nil {
+            performSegueWithIdentifier("signInSegue", sender: self)
         }
     }
-    @IBAction func testButtonPressed(sender: AnyObject) {
+
+    @IBAction func logoutButtonPressed(sender: AnyObject) {
         
-        performSegueWithIdentifier("tracksInVCSegue", sender: self)
+        if DataController.deleteSession() == "200" {
+            
+            var alertView:UIAlertView = UIAlertView()
+            alertView.title = "Logged Out!"
+            alertView.delegate = self
+            alertView.addButtonWithTitle("OK")
+            alertView.show()
+            
+            performSegueWithIdentifier("signInSegue", sender: self)
+            
+        }
+        else {
+            var alertView:UIAlertView = UIAlertView()
+            alertView.title = "There was an error loggin out!"
+            alertView.delegate = self
+            alertView.addButtonWithTitle("OK")
+            alertView.show()
+
+        }
+        
     }
-    
-    @IBAction func createNewTrackButtonPressed(sender: AnyObject) {
-        performSegueWithIdentifier("createNewTrackSegue", sender: self)
-    }
-    
-    // Update amount labels
+   
+   // Update amount labels
     
     func amountsLabels () {
         

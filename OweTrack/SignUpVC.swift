@@ -27,11 +27,21 @@ class SignUpVC: UIViewController {
     }
     
     @IBAction func joinTheClubButtonPressed(sender: UIButton) {
+        
         var user = yourNameTextField.text
         var username = chooseUsernameTextField.text
         var password = choosePasswordTextField.text
         
-        
+        if self.yourNameTextField.isFirstResponder() {
+            self.yourNameTextField.resignFirstResponder()
+        }
+        if self.choosePasswordTextField.isFirstResponder() {
+            self.choosePasswordTextField.resignFirstResponder()
+        }
+        if self.choosePasswordTextField.isFirstResponder() {
+            self.choosePasswordTextField.resignFirstResponder()
+        }
+
         if  user == nil || username == nil || password == nil {
             
             var alertView:UIAlertView = UIAlertView()
@@ -44,11 +54,11 @@ class SignUpVC: UIViewController {
         }
         else {
             var error:NSError?
-            var post = ["name":"\(user)", "email":"\(username)","password":"\(password)"]
+            var post = ["user":["name":"\(user)", "email":"\(username)", "password":"\(password)"]]
             
             println(post)
             
-            var url:NSURL = NSURL(string: "http://localhost:3000/api/v1/users")!
+            var url:NSURL = NSURL(string: "http://localhost:3000/api/v1/registrations")!
             
             var postData = NSJSONSerialization.dataWithJSONObject(post, options: nil, error: &error)
             
@@ -58,79 +68,71 @@ class SignUpVC: UIViewController {
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.setValue("application/json", forHTTPHeaderField: "Accept")
             
-            
             var reponseError: NSError?
             var response: NSURLResponse?
             
             var urlData: NSData? = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&reponseError)
             
             if ( urlData != nil ) {
-                let res = response as NSHTTPURLResponse!;
                 
-                NSLog("Response code: %ld", res.statusCode);
+                let json = JSON(data:urlData!)
+                println(json)
                 
-                if (res.statusCode >= 200 && res.statusCode < 300)
-                {
-                    var responseData:NSString  = NSString(data:urlData!, encoding:NSUTF8StringEncoding)!
+                let statusCode = json["status"].intValue
+                let token = json["data"]["auth_token"].stringValue
+                let uid = json["data"]["id"].stringValue
+                let success = json["success"].intValue
+                
+                if success == 1 {
                     
-                    NSLog("Response ==> %@", responseData);
+                    let siVC = SignInVC()
+                    
+                    var prefs = NSUserDefaults.standardUserDefaults()
+                    prefs.setValue(success, forKey: "ISLOGGEDIN")
+                    prefs.setValue(token, forKey: "APPTOKEN")
+                    prefs.setValue(uid, forKey: "UID")
+                    var responseData:NSString  = NSString(data:urlData!, encoding:NSUTF8StringEncoding)!
                     
                     var error: NSError?
                     
-                    let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as NSDictionary
+                    println("Sign Up SUCCESS")
                     
+                    var alertView:UIAlertView = UIAlertView()
+                    alertView.title = "Registered!"
+                    alertView.message = "Now start tracking"
+                    alertView.delegate = self
+                    alertView.addButtonWithTitle("OK")
+                    alertView.show()
+//                    self.dismissViewControllerAnimated(false, completion: nil)
+//                    siVC.dismissViewControllerAnimated(true, completion: nil)
+                    var printToken: AnyObject? = prefs.valueForKey("APPTOKEN")
+                    println("saved Token is: \(printToken)")
                     
-                    let success:NSInteger = jsonData.valueForKey("success") as NSInteger
-                    
-                    //[jsonData[@"success"] integerValue];
-                    
-                    NSLog("Success: %ld", success);
-                    
-                    if(success == 1)
-                    {
-                        NSLog("Sign Up SUCCESS");
-                        self.dismissViewControllerAnimated(true, completion: nil)
-                    }
-                    else {
-                        var error_msg:NSString
-                        
-                        if jsonData["error_message"] as? NSString != nil {
-                            error_msg = jsonData["error_message"] as NSString
-                        } else {
-                            error_msg = "Unknown Error"
-                        }
-                        var alertView:UIAlertView = UIAlertView()
-                        alertView.title = "Sign Up Failed!"
-                        alertView.message = error_msg
-                        alertView.delegate = self
-                        alertView.addButtonWithTitle("OK")
-                        alertView.show()
-                        
-                    }
+                    self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
                     
                 }
+                
                 else {
+                    var error_msg = json["info"]["password"].stringValue
+                    
                     var alertView:UIAlertView = UIAlertView()
                     alertView.title = "Sign Up Failed!"
-                    alertView.message = "Connection Failed"
+                    alertView.message = error_msg
                     alertView.delegate = self
                     alertView.addButtonWithTitle("OK")
                     alertView.show()
                 }
+                    
+                        
+                
             }
+                
             else {
-                var alertView:UIAlertView = UIAlertView()
-                alertView.title = "Sign in Failed!"
-                alertView.message = "Connection Failure"
-                if let error = reponseError {
-                    alertView.message = (error.localizedDescription)
-                }
-                alertView.delegate = self
-                alertView.addButtonWithTitle("OK")
-                alertView.show()
+            var alertView:UIAlertView = UIAlertView()
+            alertView.title = "Sign in Failed!"
+            alertView.message = "Connection Failure"
             }
         }
-        
     }
     
     @IBAction func alreadyAMemberButtonPressed(sender: UIButton) {

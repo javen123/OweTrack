@@ -10,71 +10,114 @@ import Foundation
 import UIKit
 
 
-
 class DataController {
     
     
    class func makeTrackAPIRequest ()  {
     
-    let url = NSURL(string:"http://localhost:3000/api/v1/tracks")
-    var request = NSMutableURLRequest(URL: url!)
+    var tracksInResult:(amount:String, date:String)
+    var tracksOutResult:(amount:String,date:String)
     
-    request.HTTPMethod = "GET"
-    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-    request.addValue("application/json", forHTTPHeaderField: "Accept")
-    
-    var data = NSURLConnection.sendSynchronousRequest(request, returningResponse: nil, error: nil)
-    
-        if data != nil {
-           
-           var json = JSON(data: data!)
-           
-           var newArray = json.arrayObject
-          println(json)
+        let prefs = NSUserDefaults.standardUserDefaults()
+        
+        if (prefs.valueForKey("APPTOKEN")) != nil {
             
-           APIArray = newArray!
+            let token:String = prefs.valueForKeyPath("APPTOKEN") as String
+            let url = NSURL(string:"http://localhost:3000/api/v1/tracks")
+            let id:AnyObject = prefs.valueForKey("UID")!
+            let newId:Int = Int(id as NSNumber)
             
-            // Add amounts to DashBoard arrays
+            var request = NSMutableURLRequest(URL: url!)
             
-            for (index:String, tracks:JSON) in json {
+            var err:NSError?
+            
+            request.HTTPMethod = "GET"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            request.addValue(token, forHTTPHeaderField: "X-AUTH-TOKEN")
+            request.addValue("\(id)", forHTTPHeaderField: "X-USER")
+            
+            var data = NSURLConnection.sendSynchronousRequest(request, returningResponse: nil, error: nil)
+            
+            if data != nil {
                 
-                if tracks["status"] == "Tracking" {
-                        
-                    if let m = tracks["owed"].string {
-                            let x = m.toInt()
-                            amountsInArray.append(x!)
-                    }
-                }
-                if tracks["status"] == "Tracking" && tracks {
+                var json = JSON(data: data!)
+                
+                // Add amounts to DashBoard arrays and tracks arrays
+                
+                for (value, tracks) in json {
                     
-                    if let m = tracks["owed"].string {
+                    let amount = tracks["owed"].intValue
+                    let date = tracks["startdate"].stringValue
+                    let m = tracks["owed"].intValue
+                    let owee = tracks["owee"].intValue
+                    let ower = tracks["ower"].intValue
+                    
+                    if tracks["status"] == "Tracking" {
+                        if owee == newId {
+                            tracksInResult.amount = "\(amount)"
+                            tracksInResult.date = date
+                            tracksInArray += [tracksInResult]
+                            amountsInArray.append(amount)
+                            println("amounts in :\(amountsInArray)")
+                        }
+                        if ower == newId {
+                            tracksOutResult.amount = "\(amount)"
+                            tracksOutResult.date = date
+                            tracksOutArray += [tracksInResult]
+                            println("amounts out:\(amountsOutArray)")
+                        }
+                        
+                        println("tracks in array: \(tracksInArray)")
+                       
+                    }
+                    if tracks["status"] == "Tracking" && tracks {
+                        
+                        if let m = tracks["owed"].string {
                             let x = m.toInt()
                             amountsOutArray.append(x!)
+                        }
                     }
                 }
             }
         }
     }
     
-    // Data func for adding to tracksIn table and tracksOut table
     
-    class func trackTableDataArray (array:NSArray) -> [(amount:String, ower:String, date:String)] {
+    // Delete session
+    
+    class func deleteSession () -> String {
         
-        var tracksInArray:[(amount:String, ower:String, date:String)] = []
-        var iterateResult:(amount:String, ower:String, date:String)
+            var error:NSError?
+            let prefs = NSUserDefaults.standardUserDefaults()
+            let token: String = (prefs.valueForKey("APPTOKEN")) as String
+            
+            var url:NSURL = NSURL(string: "http://localhost:3000/api/v1/sessions")!
         
-        if array.count > 0 {
-            for item in array {
-                let amount:String = item["owed"] as String
-                let ower:String = item["ower"] as String
-                let date:String = item["startdate"] as String
-                iterateResult = (amount:amount, ower:ower, date:date)
-                tracksInArray += [iterateResult]
+            var post = ["user":["authentication_token":"\(token)"]]
+            var postData = NSJSONSerialization.dataWithJSONObject(post, options: nil, error: &error)
+            var request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
+        
+            request.HTTPMethod = "DELETE"
+            request.HTTPBody = postData
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("application/json", forHTTPHeaderField: "Accept")
+        
+            var reponseError: NSError?
+            var response: NSURLResponse?
+            
+            var urlData: NSData? = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&reponseError)
+        
+            let json = JSON(data:urlData!)
+            let status = json["status"].stringValue
+        
+            if status == "200" {
+                    prefs.removeObjectForKey("APPTOKEN")
+                    prefs.removeObjectForKey("ISLOGGEDIN")
+                    
             }
-        }
-        
-        println(tracksInArray)
-        return tracksInArray
+        return status
     }
-
+    
+       
 }

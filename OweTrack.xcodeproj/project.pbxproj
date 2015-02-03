@@ -7,22 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F96AA1D1A7AF13F00E6899B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FEBF7BD1A7AE3F600E77BBC /* Main.storyboard */; };
+		8FBA30821A79892D005BEEC2 /* TracksOutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBA30811A79892D005BEEC2 /* TracksOutVC.swift */; };
+		8FEBF7BF1A7AE3F600E77BBC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FEBF7BC1A7AE3F600E77BBC /* LaunchScreen.xib */; };
+		8FEBF7C31A7AE41D00E77BBC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FEBF7C21A7AE41D00E77BBC /* Images.xcassets */; };
+		8FEBF7C41A7AE44E00E77BBC /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEBF7BE1A7AE3F600E77BBC /* SignInVC.swift */; };
 		CEA207C41A4DE8FA00218394 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA207C31A4DE8FA00218394 /* DataController.swift */; };
 		CEA3F0711A51F68500F6E22E /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3F0701A51F68500F6E22E /* SwiftyJSON.swift */; };
-		CEA3F0741A5338BE00F6E22E /* TracksInCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3F0731A5338BE00F6E22E /* TracksInCell.swift */; };
 		CEA3F0761A533A7F00F6E22E /* TracksInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3F0751A533A7F00F6E22E /* TracksInVC.swift */; };
-		CEA3F07C1A53413A00F6E22E /* TrackInDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3F07B1A53413A00F6E22E /* TrackInDetailVC.swift */; };
-		CEA3F07E1A53415500F6E22E /* TrackOutDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3F07D1A53415500F6E22E /* TrackOutDetailVC.swift */; };
-		CEA3F0801A53417F00F6E22E /* TrackOutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3F07F1A53417F00F6E22E /* TrackOutCell.swift */; };
-		CEA3F0821A5341D800F6E22E /* TrackOutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3F0811A5341D800F6E22E /* TrackOutVC.swift */; };
 		CEA3F0841A53429D00F6E22E /* CreateNewTrackVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3F0831A53429D00F6E22E /* CreateNewTrackVC.swift */; };
 		CEBC095C1A66CF3E00381622 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC095B1A66CF3E00381622 /* SignUpVC.swift */; };
 		CEC61E5A1A489E1C00747288 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC61E591A489E1C00747288 /* AppDelegate.swift */; };
-		CEC61E621A489E1C00747288 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEC61E601A489E1C00747288 /* Main.storyboard */; };
-		CEC61E641A489E1C00747288 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEC61E631A489E1C00747288 /* Images.xcassets */; };
-		CEC61E671A489E1C00747288 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC61E651A489E1C00747288 /* LaunchScreen.xib */; };
 		CEC61E731A489E1C00747288 /* OweTrackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC61E721A489E1C00747288 /* OweTrackTests.swift */; };
-		CEC61E7D1A489EB700747288 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC61E7C1A489EB700747288 /* SignInVC.swift */; };
 		CEC61E851A4A274E00747288 /* DashBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC61E841A4A274E00747288 /* DashBoardVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,26 +33,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8FBA30811A79892D005BEEC2 /* TracksOutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracksOutVC.swift; sourceTree = "<group>"; };
+		8FEBF7BC1A7AE3F600E77BBC /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		8FEBF7BD1A7AE3F600E77BBC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		8FEBF7BE1A7AE3F600E77BBC /* SignInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
+		8FEBF7C21A7AE41D00E77BBC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = OweTrack/Images.xcassets; sourceTree = "<group>"; };
 		CEA207C31A4DE8FA00218394 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		CEA3F0701A51F68500F6E22E /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
-		CEA3F0731A5338BE00F6E22E /* TracksInCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracksInCell.swift; sourceTree = "<group>"; };
 		CEA3F0751A533A7F00F6E22E /* TracksInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracksInVC.swift; sourceTree = "<group>"; };
-		CEA3F07B1A53413A00F6E22E /* TrackInDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackInDetailVC.swift; sourceTree = "<group>"; };
-		CEA3F07D1A53415500F6E22E /* TrackOutDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackOutDetailVC.swift; path = ../TrackOutDetailVC.swift; sourceTree = "<group>"; };
-		CEA3F07F1A53417F00F6E22E /* TrackOutCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackOutCell.swift; path = ../TrackOutCell.swift; sourceTree = "<group>"; };
-		CEA3F0811A5341D800F6E22E /* TrackOutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackOutVC.swift; sourceTree = "<group>"; };
 		CEA3F0831A53429D00F6E22E /* CreateNewTrackVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewTrackVC.swift; sourceTree = "<group>"; };
 		CEBC095B1A66CF3E00381622 /* SignUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		CEC61E541A489E1C00747288 /* OweTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OweTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEC61E581A489E1C00747288 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEC61E591A489E1C00747288 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CEC61E611A489E1C00747288 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		CEC61E631A489E1C00747288 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		CEC61E661A489E1C00747288 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		CEC61E6C1A489E1C00747288 /* OweTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OweTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEC61E711A489E1C00747288 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEC61E721A489E1C00747288 /* OweTrackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OweTrackTests.swift; sourceTree = "<group>"; };
-		CEC61E7C1A489EB700747288 /* SignInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignInVC.swift; path = ../SignInVC.swift; sourceTree = "<group>"; };
 		CEC61E841A4A274E00747288 /* DashBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashBoardVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,8 +74,6 @@
 			isa = PBXGroup;
 			children = (
 				CEA3F0751A533A7F00F6E22E /* TracksInVC.swift */,
-				CEA3F07B1A53413A00F6E22E /* TrackInDetailVC.swift */,
-				CEA3F0731A5338BE00F6E22E /* TracksInCell.swift */,
 			);
 			name = TracksIn;
 			sourceTree = "<group>";
@@ -91,9 +81,7 @@
 		CEA3F0781A5340D000F6E22E /* TracksOut */ = {
 			isa = PBXGroup;
 			children = (
-				CEA3F0811A5341D800F6E22E /* TrackOutVC.swift */,
-				CEA3F07D1A53415500F6E22E /* TrackOutDetailVC.swift */,
-				CEA3F07F1A53417F00F6E22E /* TrackOutCell.swift */,
+				8FBA30811A79892D005BEEC2 /* TracksOutVC.swift */,
 			);
 			name = TracksOut;
 			sourceTree = "<group>";
@@ -101,6 +89,7 @@
 		CEC61E4B1A489E1C00747288 = {
 			isa = PBXGroup;
 			children = (
+				8FEBF7C21A7AE41D00E77BBC /* Images.xcassets */,
 				CEC61E561A489E1C00747288 /* OweTrack */,
 				CEC61E6F1A489E1C00747288 /* OweTrackTests */,
 				CEC61E551A489E1C00747288 /* Products */,
@@ -119,7 +108,8 @@
 		CEC61E561A489E1C00747288 /* OweTrack */ = {
 			isa = PBXGroup;
 			children = (
-				CEC61E601A489E1C00747288 /* Main.storyboard */,
+				8FEBF7BC1A7AE3F600E77BBC /* LaunchScreen.xib */,
+				8FEBF7BD1A7AE3F600E77BBC /* Main.storyboard */,
 				CEC61E861A4A28C400747288 /* SigningIn */,
 				CEA3F0831A53429D00F6E22E /* CreateNewTrackVC.swift */,
 				CEC61E591A489E1C00747288 /* AppDelegate.swift */,
@@ -127,8 +117,6 @@
 				CEC61E841A4A274E00747288 /* DashBoardVC.swift */,
 				CEA3F0771A53407100F6E22E /* TracksIn */,
 				CEA3F0781A5340D000F6E22E /* TracksOut */,
-				CEC61E631A489E1C00747288 /* Images.xcassets */,
-				CEC61E651A489E1C00747288 /* LaunchScreen.xib */,
 				CEC61E571A489E1C00747288 /* Supporting Files */,
 			);
 			path = OweTrack;
@@ -163,8 +151,8 @@
 		CEC61E861A4A28C400747288 /* SigningIn */ = {
 			isa = PBXGroup;
 			children = (
+				8FEBF7BE1A7AE3F600E77BBC /* SignInVC.swift */,
 				CEBC095B1A66CF3E00381622 /* SignUpVC.swift */,
-				CEC61E7C1A489EB700747288 /* SignInVC.swift */,
 			);
 			name = SigningIn;
 			sourceTree = "<group>";
@@ -250,9 +238,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEC61E621A489E1C00747288 /* Main.storyboard in Resources */,
-				CEC61E671A489E1C00747288 /* LaunchScreen.xib in Resources */,
-				CEC61E641A489E1C00747288 /* Images.xcassets in Resources */,
+				8F96AA1D1A7AF13F00E6899B /* Main.storyboard in Resources */,
+				8FEBF7BF1A7AE3F600E77BBC /* LaunchScreen.xib in Resources */,
+				8FEBF7C31A7AE41D00E77BBC /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,19 +258,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEA3F07C1A53413A00F6E22E /* TrackInDetailVC.swift in Sources */,
-				CEA3F0801A53417F00F6E22E /* TrackOutCell.swift in Sources */,
+				8FEBF7C41A7AE44E00E77BBC /* SignInVC.swift in Sources */,
 				CEC61E5A1A489E1C00747288 /* AppDelegate.swift in Sources */,
-				CEA3F0741A5338BE00F6E22E /* TracksInCell.swift in Sources */,
 				CEA3F0761A533A7F00F6E22E /* TracksInVC.swift in Sources */,
 				CEA207C41A4DE8FA00218394 /* DataController.swift in Sources */,
-				CEC61E7D1A489EB700747288 /* SignInVC.swift in Sources */,
 				CEA3F0711A51F68500F6E22E /* SwiftyJSON.swift in Sources */,
 				CEC61E851A4A274E00747288 /* DashBoardVC.swift in Sources */,
 				CEA3F0841A53429D00F6E22E /* CreateNewTrackVC.swift in Sources */,
 				CEBC095C1A66CF3E00381622 /* SignUpVC.swift in Sources */,
-				CEA3F0821A5341D800F6E22E /* TrackOutVC.swift in Sources */,
-				CEA3F07E1A53415500F6E22E /* TrackOutDetailVC.swift in Sources */,
+				8FBA30821A79892D005BEEC2 /* TracksOutVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,25 +287,6 @@
 			targetProxy = CEC61E6D1A489E1C00747288 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		CEC61E601A489E1C00747288 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEC61E611A489E1C00747288 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		CEC61E651A489E1C00747288 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEC61E661A489E1C00747288 /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		CEC61E741A489E1C00747288 /* Debug */ = {

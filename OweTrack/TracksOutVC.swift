@@ -1,21 +1,19 @@
 //
-//  TracksInVC.swift
+//  TracksOutVC.swift
 //  OweTrack
 //
-//  Created by user on 12/30/14.
-//  Copyright (c) 2014 Neva. All rights reserved.
+//  Created by Jim Aven on 1/28/15.
+//  Copyright (c) 2015 Neva. All rights reserved.
 //
 
 import UIKit
 
-class TracksInVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
-   @IBOutlet weak var tableView: UITableView!
-    
-   override func viewDidLoad() {
+class TracksOutVC: UIViewController {
+
+    override func viewDidLoad() {
         super.viewDidLoad()
-    
-      
+
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,30 +27,30 @@ class TracksInVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     // MARK: - UItableViewDataSource
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("trackInCell") as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("trackOutCell") as UITableViewCell
         
         var trackInfo:String!
         
-        if tracksInArray.count > 0 {
-            trackInfo = "$\(tracksInArray[indexPath.row].amount),    Due:  \(tracksInArray[indexPath.row].date)"
+        if tracksOutArray.count > 0 {
+            trackInfo = "$\(tracksOutArray[indexPath.row].amount),  Due:  \(tracksOutArray[indexPath.row].date)"
             
         }
         
         cell.textLabel?.text = trackInfo
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         
-    return cell
-    
+        return cell
+        
     }
-
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let tableRows = tracksInArray.count
+        let tableRows = tracksOutArray.count
         
-     return tableRows
+        return tableRows
         
     }
-
+    
     // MARK: - UITableViewDelegate
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -61,11 +59,11 @@ class TracksInVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "Owed to you"
+            return "You owe"
         }
         else {
             return "Closed"
         }
     }
-    
 }
+

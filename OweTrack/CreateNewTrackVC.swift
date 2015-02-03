@@ -14,12 +14,23 @@ class CreateNewTrackVC: UIViewController {
     @IBOutlet weak var owerAmountField: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.resignFirstResponder()
+        //Label tabs resignn responders
+        
+        if self.owerAmountField.isFirstResponder() {
+            self.owerAmountField.resignFirstResponder()
+        }
+        if self.owerEmailField.isFirstResponder() {
+            self.owerEmailField.resignFirstResponder()
+        }
+        if self.datePicker.isFirstResponder() {
+            self.datePicker.resignFirstResponder()
+        }
 
-        // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,12 +44,16 @@ class CreateNewTrackVC: UIViewController {
             var owerAmount = owerAmountField.text
             var owerEmail = owerEmailField.text
             var date = APIDateFormatter(datePicker.date)
-            println(datePicker.date)
-            let token = NSUserDefaults.standardUserDefaults()
-            let token1:String = token.valueForKey("APPTOKEN") as String
-            var post = ["@track.owed":"\(owerAmount)","@track.startDate":"\(date)", "@track.status":"Tracking"]
+            
+            let prefs = NSUserDefaults.standardUserDefaults()
+            let uid:AnyObject = prefs.objectForKey("UID")!
+            
+            let token:String = prefs.valueForKey("APPTOKEN") as String
+            
+            var post = ["owee":"\(uid)","owed":"\(owerAmount)","startdate":"\(date)", "status":"Tracking", "ower": "\(owerEmail)"]
            
-            NSLog("PostData: %@",post);
+            println("PostData: \(post)")
+            
             var error:NSError?
             var url:NSURL = NSURL(string: "http://localhost:3000/api/v1/tracks")!
             
@@ -48,35 +63,48 @@ class CreateNewTrackVC: UIViewController {
             request.HTTPMethod = "POST"
             request.HTTPBody = postData
             
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.setValue("application/json", forHTTPHeaderField: "Accept")
-            request.setValue("authenticityToken", forKey: token1)
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            request.addValue(token, forHTTPHeaderField: "X-AUTH-TOKEN")
+            
             
             var reponseError: NSError?
             var response: NSURLResponse?
             
             var urlData: NSData? = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&reponseError)
             
-            if ( urlData != nil ) {
+            var json = JSON(data:urlData!)
+            
+            println("my response is:\(json)")
+            
+            var repsonseUID = uid.intValue
+            
+            if json["owee"] != nil {
                 
-                let res = response as NSHTTPURLResponse!;
-                
-                println("Response code: \(res.statusCode)")
-                
-                if (res.statusCode >= 200 && res.statusCode < 300) {
-                    
-                    var responseData:NSString  = NSString(data:urlData!, encoding:NSUTF8StringEncoding)!
-                    
-                    println("Response ==> \(responseData)")
-                    
-                    var error: NSError?
-                    
-                    let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as NSDictionary
-                    
-                    println("jasonData: \(jsonData)")
-                }
-           }
+                var alertView:UIAlertView = UIAlertView()
+                alertView.title = "Track Created!"
+                alertView.delegate = self
+                alertView.addButtonWithTitle("OK")
+                alertView.show()
+            
+            self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            else {
+                var alertView:UIAlertView = UIAlertView()
+                alertView.title = "Error"
+                alertView.delegate = self
+                alertView.addButtonWithTitle("OK")
+                alertView.show()
+            }
+            
        }
+        else {
+            var alertView:UIAlertView = UIAlertView()
+            alertView.title = "Please fill in all the fields"
+            alertView.delegate = self
+            alertView.addButtonWithTitle("OK")
+            alertView.show()
+        }
     }
     
     @IBAction func cancelButtonPressed(sender: UIButton) {
@@ -85,11 +113,15 @@ class CreateNewTrackVC: UIViewController {
     
     //Date formatter
     
-    func APIDateFormatter (date:NSDate) ->String {
+    func APIDateFormatter (date:NSDate) -> String {
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy/dd/mm"
-        let apiDate = dateFormatter.stringFromDate(date)
+        println(date)
+        
+        let calendar = NSCalendar.currentCalendar()
+        
+        let components = calendar.components(.MonthCalendarUnit | .DayCalendarUnit | .YearCalendarUnit, fromDate: date)
+        
+        let apiDate = "\(components.month)/\(components.day)/\(components.year)"
         
         return apiDate
     }

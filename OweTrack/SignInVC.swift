@@ -31,7 +31,15 @@ class SignInVC: UIViewController {
         var username = emailTextField.text
         var password = passwordTextField.text
         
-        if ( username == nil || password == nil) {
+        if self.emailTextField.isFirstResponder() {
+            self.emailTextField.resignFirstResponder()
+        }
+        
+        if self.passwordTextField.isFirstResponder() {
+            self.passwordTextField.resignFirstResponder()
+        }
+        
+        if (username.isEmpty || password.isEmpty) {
         
             var alertView:UIAlertView = UIAlertView()
             alertView.title = "Sign in Failed!"
@@ -44,17 +52,17 @@ class SignInVC: UIViewController {
             
             var post = ["email":"\(username)","password":"\(password)"]
             
-            NSLog("PostData: %@",post);
+            println("PostData: \(post)")
+            
             var error:NSError?
-            var url:NSURL = NSURL(string: "http://localhost:3000//api/v1/users/sign_in")!
             
-            var postData = NSJSONSerialization.dataWithJSONObject(post, options: NSJSONWritingOptions(), error: &error)
+            var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:3000/api/v1/sessions")!)
             
-            var request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
             request.HTTPMethod = "POST"
-            request.HTTPBody = postData
+            request.HTTPBody = NSJSONSerialization.dataWithJSONObject(post, options:nil, error: &error)
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.setValue("application/json", forHTTPHeaderField: "Accept")
+           
             
             var reponseError: NSError?
             var response: NSURLResponse?
@@ -63,7 +71,7 @@ class SignInVC: UIViewController {
             
             if ( urlData != nil ) {
                 
-                let res = response as NSHTTPURLResponse!;
+                let res:NSHTTPURLResponse = response as NSHTTPURLResponse!
                 
                 println("Response code: \(res.statusCode)")
                 
@@ -77,10 +85,12 @@ class SignInVC: UIViewController {
                     
                     let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as NSDictionary
                     
-                    println("jasonData: \(jsonData)")
+                    let json = JSON(jsonData)
+                    println(json)
                     
-                    let success:NSInteger = jsonData.valueForKey("success") as NSInteger
-                    let token:NSString = jsonData.valueForKey("token") as NSString
+                    let success = json["success"].intValue
+                    let token = json["token"].stringValue
+                    let uid = json["uid"].intValue
                     
                     if success == 1 {
                         
@@ -90,11 +100,13 @@ class SignInVC: UIViewController {
                         var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
                         prefs.setValue(success, forKey: "ISLOGGEDIN")
                         prefs.setValue(token, forKey: "APPTOKEN")
+                        prefs.setValue(uid, forKey: "UID")
                         prefs.synchronize()
                         
                         self.dismissViewControllerAnimated(true, completion: nil)
 
                     }
+                        
                     else  if jsonData["error_message"] as? NSString != nil {
                         
                         var error_msg:NSString
@@ -135,7 +147,7 @@ class SignInVC: UIViewController {
     }
     
     @IBAction func needAccountButtonPressed(sender: UIButton) {
-        performSegueWithIdentifier("newUserSegue", sender: self)
+        performSegueWithIdentifier("signUpSegue", sender: self)
     }
    
         
